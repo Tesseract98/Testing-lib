@@ -22,7 +22,7 @@ public class ReflectionHelperTest {
     @After
     public void cleanAll(){
         testClass = null;
-        System.out.println("After annotation");
+        System.out.println("After annotation\n");
     }
 
     @Test
@@ -46,6 +46,12 @@ public class ReflectionHelperTest {
         System.out.println("Test isEqual");
         TestClass testCl = ReflectionHelper.initiate(TestClass.class, "new object", 10);
         assert Objects.equals(testCl, testClass) : "testCl is not equal testClass";
+    }
+
+    @Test(expectedException = Test.ExceptionStatus.TRUE)
+    public void throwException() {
+        System.out.println("Test throwException");
+        throw new RuntimeException("all right");
     }
 
 }

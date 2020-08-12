@@ -38,7 +38,7 @@ public class ReflectionHelper {
     }
 
     private static Class<?>[] toClass(Object[] args) {
-        return (Class<?>[]) Arrays.stream(args).map(Object::getClass).toArray();
+        return Arrays.stream(args).map(Object::getClass).toArray(Class[]::new);
     }
 
 }
