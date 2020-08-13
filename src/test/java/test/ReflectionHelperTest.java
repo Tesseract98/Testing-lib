@@ -1,11 +1,13 @@
 package test;
 
+import lombok.extern.slf4j.Slf4j;
 import test.annotation.After;
 import test.annotation.Before;
 import test.annotation.Test;
 
 import java.util.Objects;
 
+@Slf4j
 @SuppressWarnings("unused")
 public class ReflectionHelperTest {
 
@@ -16,25 +18,25 @@ public class ReflectionHelperTest {
         testClass = new TestClass();
         testClass.setNum(10);
         testClass.setStr("new obj");
-        System.out.println("Before annotation");
+        log.debug("Before annotation");
     }
 
     @After
     public void cleanAll(){
         testClass = null;
-        System.out.println("After annotation\n");
+        log.debug("After annotation\n");
     }
 
     @Test
     public void initiate(){
-        System.out.println("Test initiate");
+        log.debug("Test initiate");
         TestClass testCl = ReflectionHelper.initiate(TestClass.class);
         assert testCl != null : "testCl is null";
     }
 
     @Test
     public void getFieldValue(){
-        System.out.println("Test getFieldValue");
+        log.debug("Test getFieldValue");
         assert Objects.equals(ReflectionHelper.
                 getFieldValue(testClass, "str"), "new obj") : "str value not equal 'new obj'";
         assert Objects.equals(ReflectionHelper.
@@ -43,14 +45,14 @@ public class ReflectionHelperTest {
 
     @Test
     public void isEqual(){
-        System.out.println("Test isEqual");
+        log.debug("Test isEqual");
         TestClass testCl = ReflectionHelper.initiate(TestClass.class, "new object", 10);
         assert Objects.equals(testCl, testClass) : "testCl is not equal testClass";
     }
 
     @Test(expectedException = Test.ExceptionStatus.TRUE)
     public void throwException() {
-        System.out.println("Test throwException");
+        log.debug("Test throwException");
         throw new RuntimeException("all right");
     }
 

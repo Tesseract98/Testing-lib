@@ -1,6 +1,7 @@
 package test;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import test.annotation.After;
 import test.annotation.Before;
 import test.annotation.Test;
@@ -12,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class TestingCore {
 
     private static final Map<Class<?>, List<Method>> methodsWithAnnotation;
@@ -31,7 +33,7 @@ public class TestingCore {
                 try {
                     method.invoke(obj);
                 } catch (Exception exc) {
-                    System.out.println(exc.getCause().getMessage());
+                    log.info(exc.getCause().getMessage());
                 }
             } else {
                 method.invoke(obj);
